@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mech N'Roses - École Ozanam Lille</title>
+<meta content="Équipe de robotique Mech N'Roses de l'École Ozanam Lille pour la Coupe de France de Robotique 2025" name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    /* Styles de base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Inter', sans-serif;
+    }
+    
+    body {
+      color: #ffffff;
+      background: linear-gradient(to bottom, #1a3a5e, #0c1f33);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    
+    /* Utilitaires */
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    .relative { position: relative; }
+    .absolute { position: absolute; }
+    .fixed { position: fixed; }
+    .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+    .z-0 { z-index: 0; }
+    .z-10 { z-index: 10; }
+    .z-50 { z-index: 50; }
+    
+    .flex { display: flex; }
+    .grid { display: grid; }
+    .hidden { display: none; }
+    .items-center { align-items: center; }
+    .items-start { align-items: flex-start; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .justify-start { justify-content: flex-start; }
+    .flex-col { flex-direction: column; }
+    .flex-row { flex-direction: row; }
+    .flex-1 { flex: 1 1 0%; }
+    .shrink-0 { flex-shrink: 0; }
+    
+    .h-screen { height: 100vh; }
+    .min-h-screen { min-height: 100vh; }
+    .w-full { width: 100%; }
+    .h-full { height: 100%; }
+    .max-w-md { max-width: 28rem; }
+    .max-w-lg { max-width: 32rem; }
+    .max-w-xl { max-width: 36rem; }
+    .max-w-2xl { max-width: 42rem; }
+    .max-w-3xl { max-width: 48rem; }
+    .max-w-4xl { max-width: 56rem; }
+    
+    .gap-2 { gap: 0.5rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-8 { gap: 2rem; }
+    .gap-12 { gap: 3rem; }
+    .space-x-3 > * + * { margin-left: 0.75rem; }
+    .space-x-4 > * + * { margin-left: 1rem; }
+    .space-x-8 > * + * { margin-left: 2rem; }
+    .space-y-2 > * + * { margin-top: 0.5rem; }
+    .space-y-6 > * + * { margin-top: 1.5rem; }
+    
+    .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+    .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+    .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .p-4 { padding: 1rem; }
+    .p-6 { padding: 1.5rem; }
+    .p-8 { padding: 2rem; }
+    .pt-8 { padding-top: 2rem; }
+    .pt-16 { padding-top: 4rem; }
+    .pb-8 { padding-bottom: 2rem; }
+    
+    .m-auto { margin: auto; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .my-2 { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+    .mt-8 { margin-top: 2rem; }
+    .mt-12 { margin-top: 3rem; }
+    .mb-1 { margin-bottom: 0.25rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .mb-12 { margin-bottom: 3rem; }
+    .mb-16 { margin-bottom: 4rem; }
+    .mr-4 { margin-right: 1rem; }
+    .mx-3 { margin-left: 0.75rem; margin-right: 0.75rem; }
+    
+    .text-center { text-align: center; }
+    .text-left { text-align: left; }
+    
+    .text-xs { font-size: 0.75rem; }
+    .text-sm { font-size: 0.875rem; }
+    .text-base { font-size: 1rem; }
+    .text-lg { font-size: 1.125rem; }
+    .text-xl { font-size: 1.25rem; }
+    .text-2xl { font-size: 1.5rem; }
+    .text-3xl { font-size: 1.875rem; }
+    .text-4xl { font-size: 2.25rem; }
+    .text-5xl { font-size: 3rem; }
+    .text-7xl { font-size: 4.5rem; }
+    
+    .font-light { font-weight: 300; }
+    .font-normal { font-weight: 400; }
+    .font-medium { font-weight: 500; }
+    .font-bold { font-weight: 700; }
+    
+    .uppercase { text-transform: uppercase; }
+    .tracking-wider { letter-spacing: 0.05em; }
+    
+    /* Couleurs */
+    .text-white { color: #ffffff; }
+    .text-blue-300 { color: #4d9bf5; }
+    .text-yellow-300 { color: #f5d04d; }
+    .bg-blue-300 { background-color: #4d9bf5; }
+    .bg-blue-300\/20 { background-color: rgba(77, 155, 245, 0.2); }
+    .bg-blue-300\/10 { background-color: rgba(77, 155, 245, 0.1); }
+    .bg-yellow-300 { background-color: #f5d04d; }
+    .border-blue-300 { border-color: #4d9bf5; }
+    .border-yellow-300 { border-color: #f5d04d; }
+    .border-blue-900\/30 { border-color: rgba(30, 58, 138, 0.3); }
+    
+    .text-white\/70 { color: rgba(255, 255, 255, 0.7); }
+    .text-white\/50 { color: rgba(255, 255, 255, 0.5); }
+    .text-white\/80 { color: rgba(255, 255, 255, 0.8); }
+    
+    .bg-\[\#0c1f33\] { background-color: #0c1f33; }
+    .bg-\[\#1a3a5e\] { background-color: #1a3a5e; }
+    .bg-\[\#0c1f33\]\/90 { background-color: rgba(12, 31, 51, 0.9); }
+    
+    /* Bordures */
+    .border { border-width: 1px; }
+    .border-t { border-top-width: 1px; }
+    .border-b { border-bottom-width: 1px; }
+    .border-4 { border-width: 4px; }
+    .rounded-lg { border-radius: 0.5rem; }
+    .rounded-xl { border-radius: 0.75rem; }
+    .rounded-full { border-radius: 9999px; }
+    .rounded-l-lg { border-top-left-radius: 0.5rem; border-bottom-left-radius: 0.5rem; }
+    .rounded-l-none { border-top-left-radius: 0; border-bottom-left-radius: 0; }
+    
+    /* Effets */
+    .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+    .backdrop-blur-sm { backdrop-filter: blur(4px); }
+    .opacity-10 { opacity: 0.1; }
+    .overflow-hidden { overflow: hidden; }
+    
+    .transition-colors { transition-property: color, background-color, border-color; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+    .transition-transform { transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+    .transform { transform: translateX(0) translateY(0) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1); }
+    .hover\:scale-105:hover { transform: scale(1.05); }
+    
+    /* Animations */
+    .animate-pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .5; }
+    }
+    
+    .animate-bounce {
+      animation: bounce 1s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+      50% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+    }
+    
+    /* Images et fonds */
+    .object-cover { object-fit: cover; }
+    .object-contain { object-fit: contain; }
+    .bg-repeat { background-repeat: repeat; }
+    .bg-gradient-to-b { background-image: linear-gradient(to bottom, var(--tw-gradient-stops)); }
+    .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+    .from-red-500 { --tw-gradient-from: #ef4444; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(239, 68, 68, 0)); }
+    .via-yellow-500 { --tw-gradient-via: #eab308; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to, rgba(234, 179, 8, 0)); }
+    .to-green-500 { --tw-gradient-to: #22c55e; }
+    
+    /* Boutons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      transition-property: color, background-color, border-color;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 150ms;
+    }
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid;
+    }
+    .btn-primary {
+      background-color: #4d9bf5;
+      color: #0c1f33;
+    }
+    .btn-primary:hover {
+      background-color: #3a8ce6;
+    }
+    .btn-outline-blue {
+      border-color: #4d9bf5;
+      color: #4d9bf5;
+    }
+    .btn-outline-blue:hover {
+      background-color: rgba(77, 155, 245, 0.1);
+    }
+    .btn-outline-yellow {
+      border-color: #f5d04d;
+      color: #f5d04d;
+    }
+    .btn-outline-yellow:hover {
+      background-color: rgba(245, 208, 77, 0.1);
+    }
+    
+    /* Formulaires */
+    input, textarea {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      background-color: #0c1f33;
+      border: 1px solid rgba(30, 58, 138, 0.3);
+      border-radius: 0.5rem;
+      color: white;
+      outline: none;
+    }
+    input:focus, textarea:focus {
+      box-shadow: 0 0 0 2px rgba(77, 155, 245, 0.5);
+    }
+    textarea {
+      resize: none;
+    }
+    
+    /* Layout responsive */
+    .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    
+    @media (min-width: 640px) {
+      .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .sm\:flex-row { flex-direction: row; }
+    }
+    
+    @media (min-width: 768px) {
+      .md\:flex { display: flex; }
+      .md\:hidden { display: none; }
+      .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .md\:flex-row { flex-direction: row; }
+      .md\:text-left { text-align: left; }
+      .md\:text-2xl { font-size: 1.5rem; }
+      .md\:text-4xl { font-size: 2.25rem; }
+      .md\:text-7xl { font-size: 4.5rem; }
+      .md\:text-xl { font-size: 1.25rem; }
+      .md\:w-\[400px\] { width: 400px; }
+      .md\:h-\[400px\] { height: 400px; }
+      .md\:mb-0 { margin-bottom: 0; }
+    }
+    
+    @media (min-width: 1024px) {
+      .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .lg\:flex { display: flex; }
+      .lg\:hidden { display: none; }
+      .lg\:text-left { text-align: left; }
+      .lg\:mx-0 { margin-left: 0; margin-right: 0; }
+      .lg\:justify-start { justify-content: flex-start; }
+      .lg\:order-1 { order: 1; }
+      .lg\:order-2 { order: 2; }
+    }
+    
+    @media (min-width: 1280px) {
+      .xl\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    }
+    
+    /* Classes spécifiques */
+    .aspect-video {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+    }
+    .aspect-video img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Icons */
+    .icon {
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      stroke-width: 0;
+      stroke: currentColor;
+      fill: currentColor;
+      vertical-align: middle;
+    }
+    
+    /* Utilitaires pour les images */
+    .img-container {
+      position: relative;
+    }
+    .img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Effet de défilement linéaire pour les raccourcis en haut */
+    nav a {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #4d9bf5;
+      transition: width 0.3s linear;
+    }
+    
+    nav a:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+<div class="flex flex-col min-h-screen">
+<!-- Navigation -->
+<header class="fixed w-full bg-[#0c1f33]/90 backdrop-blur-sm z-50 border-b border-blue-900/30">
+<div class="container mx-auto px-4">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-2">
+<span class="text-xl font-bold text-blue-300">
+              MECH<span class="text-blue-300">N'</span>ROSES
+            </span>
+</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-sm font-medium text-white hover:text-blue-300 transition-colors" href="#about">À PROPOS</a>
+<a class="text-sm font-medium text-white hover:text-blue-300 transition-colors" href="#event">ÉVÉNEMENT</a>
+<a class="text-sm font-medium text-white hover:text-blue-300 transition-colors" href="#team">ÉQUIPE</a>
+<a class="text-sm font-medium text-white hover:text-blue-300 transition-colors" href="#contact">CONTACT</a>
+</nav>
+<button class="hidden md:flex btn btn-outline btn-outline-blue">NOUS SOUTENIR</button>
+<button class="md:hidden text-white">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden bg-[#1a3a5e]">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-b from-[#1a3a5e] to-[#0c1f33]"></div>
+</div>
+<div class="container mx-auto px-4 z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="text-center lg:text-left">
+<h1 class="text-5xl md:text-7xl font-bold mb-4 text-blue-300 tracking-wider">
+                MECH<span class="text-blue-300">N'</span>ROSES
+              </h1>
+<h2 class="text-xl md:text-2xl mb-6 text-blue-300 font-light">COUPE DE FRANCE DE ROBOTIQUE</h2>
+<div class="h-1 w-32 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 mb-8 mx-auto lg:mx-0"></div>
+<p class="text-lg md:text-xl mb-8 max-w-xl mx-auto lg:mx-0">
+                L'équipe de robotique de l'École Ozanam Lille, prête à relever les défis de la Coupe de France de
+                Robotique 2025.
+              </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+<a class="btn btn-outline btn-outline-yellow" href="#contact">NOUS CONTACTER</a>
+</div>
+<div class="mt-12 flex items-center justify-center lg:justify-start">
+<div class="flex items-center gap-2 text-sm text-white/70">
+<svg class="icon" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+<rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect>
+<line x1="16" x2="16" y1="2" y2="6"></line>
+<line x1="8" x2="8" y1="2" y2="6"></line>
+<line x1="3" x2="21" y1="10" y2="10"></line>
+<path d="M8 14h.01"></path>
+<path d="M12 14h.01"></path>
+<path d="M16 14h.01"></path>
+<path d="M8 18h.01"></path>
+<path d="M12 18h.01"></path>
+<path d="M16 18h.01"></path>
+</svg>
+<span>22 MARS 2025</span>
+</div>
+<div class="w-1 h-1 rounded-full bg-white/30 mx-3"></div>
+<div class="flex items-center gap-2 text-sm text-white/70">
+<svg class="icon" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="10"></circle>
+<polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+<span>09H-17H</span>
+</div>
+</div>
+</div>
+<div class="relative flex justify-center">
+<!-- Affiche Mech N'Roses -->
+<img alt="Affiche Mech N'Roses" class="rounded-xl shadow-lg max-w-md w-full" src="images/affiche-bleue.jpg"/>
+</div>
+</div>
+</div>
+<div class="absolute bottom-10 w-full flex justify-center">
+<a class="flex flex-col items-center text-white/50 hover:text-white transition-colors" href="#about">
+<span class="text-xs uppercase mb-2">Découvrir</span>
+<svg class="animate-bounce" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="m6 9 6 6 6-6"></path>
+</svg>
+</a>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-24 bg-[#0c1f33]" id="about">
+<div class="container mx-auto px-4">
+<div class="max-w-3xl mx-auto text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold mb-6 text-blue-300">À PROPOS DE NOTRE ÉQUIPE</h2>
+<div class="h-1 w-24 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 mx-auto mb-8"></div>
+<p class="text-lg text-white/80">
+              Mech N'Roses est l'équipe de robotique représentant l'École Ozanam Lille à la Coupe de France de
+              Robotique 2025. Notre passion pour l'innovation et la technologie nous pousse à repousser les limites de
+              la robotique.
+            </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-[#1a3a5e] rounded-xl p-8 shadow-lg transform transition-transform hover:scale-105">
+<div class="w-14 h-14 bg-blue-300/20 rounded-lg flex items-center justify-center mb-6">
+<svg class="h-8 w-8 text-blue-300" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-xl font-bold mb-4 text-yellow-300">Innovation</h3>
+<p class="text-white/70">
+                Nous développons des solutions robotiques innovantes pour relever les défis de la compétition avec
+                créativité et ingéniosité.
+              </p>
+</div>
+<div class="bg-[#1a3a5e] rounded-xl p-8 shadow-lg transform transition-transform hover:scale-105">
+<div class="w-14 h-14 bg-blue-300/20 rounded-lg flex items-center justify-center mb-6">
+<svg class="h-8 w-8 text-blue-300" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-xl font-bold mb-4 text-yellow-300">Collaboration</h3>
+<p class="text-white/70">
+                Notre équipe multidisciplinaire combine des compétences en mécanique, électronique, programmation et
+                design pour créer des robots performants.
+              </p>
+</div>
+<div class="bg-[#1a3a5e] rounded-xl p-8 shadow-lg transform transition-transform hover:scale-105">
+<div class="w-14 h-14 bg-blue-300/20 rounded-lg flex items-center justify-center mb-6">
+<svg class="h-8 w-8 text-blue-300" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" round"="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h3 class="text-xl font-bold mb-4 text-yellow-300">Excellence</h3>
+<p class="text-white/70">
+                Nous visons l'excellence dans chaque aspect de notre travail, de la conception à la réalisation, pour
+                représenter fièrement notre école.
+              </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Event Section -->
+<section class="py-24 bg-[#1a3a5e]" id="event">
+<div class="container mx-auto px-4">
+<div class="max-w-3xl mx-auto text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold mb-6 text-blue-300">L'ÉVÉNEMENT</h2>
+<div class="h-1 w-24 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 mx-auto mb-8"></div>
+<p class="text-lg text-white/80">
+              Rejoignez-nous pour la Coupe de France de Robotique 2025, une compétition passionnante où les meilleures
+              équipes s'affrontent dans des défis robotiques innovants.
+            </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="order-2 lg:order-1">
+<div class="bg-[#0c1f33] rounded-xl p-8 shadow-lg">
+<div class="flex flex-col space-y-6">
+<div class="flex items-start">
+<div class="w-12 h-12 bg-blue-300/20 rounded-lg flex items-center justify-center mr-4 shrink-0">
+<svg class="icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect>
+<line x1="16" x2="16" y1="2" y2="6"></line>
+<line x1="8" x2="8" y1="2" y2="6"></line>
+<line x1="3" x2="21" y1="10" y2="10"></line>
+<path d="M8 14h.01"></path>
+<path d="M12 14h.01"></path>
+<path d="M16 14h.01"></path>
+<path d="M8 18h.01"></path>
+<path d="M12 18h.01"></path>
+<path d="M16 18h.01"></path>
+</svg>
+</div>
+<div>
+<h3 class="text-lg font-bold mb-2 text-yellow-300">Date</h3>
+<p class="text-white/70">22 Mars 2025</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-12 h-12 bg-blue-300/20 rounded-lg flex items-center justify-center mr-4 shrink-0">
+<svg class="icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+<circle cx="12" cy="10" r="3"></circle>
+</svg>
+</div>
+<div>
+<h3 class="text-lg font-bold mb-2 text-yellow-300">Lieu</h3>
+<p class="text-white/70">Pecquencourt</p>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-8 border-t border-blue-900/30">
+<a class="text-blue-300 hover:underline" href="https://www.coupederobotique.fr/" target="_blank">
+                    Coupe de France de Robotique 2025
+                  </a>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2">
+<div class="relative">
+<div class="absolute -inset-4 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 rounded-xl opacity-30 blur-lg"></div>
+<div class="relative bg-[#0c1f33] rounded-xl overflow-hidden">
+<div class="p-6 text-center">
+<h3 class="text-xl font-bold mb-2 text-yellow-300">Coupe de France de Robotique 2025</h3>
+<p class="text-white/70 mb-4">
+                      Une compétition nationale qui rassemble les meilleures équipes de robotique pour des défis
+                      techniques passionnants.
+                    </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 text-center"><img alt="Affiche 2024" class="mx-auto rounded-xl shadow-lg max-w-md w-full" src="images/affiche-rouge.png"/></div></section>
+<!-- Team Section -->
+<section class="py-24 bg-[#0c1f33]" id="team">
+<div class="container mx-auto px-4">
+<div class="max-w-3xl mx-auto text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold mb-6 text-blue-300">NOTRE ÉQUIPE</h2>
+<div class="h-1 w-24 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 mx-auto mb-8"></div>
+<p class="text-lg text-white/80">
+              Découvrez les talents qui composent l'équipe Mech N'Roses, chacun apportant son expertise pour créer des
+              robots innovants.
+            </p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+<!-- Team members -->
+<div class="group">
+<div class="bg-[#1a3a5e] rounded-xl overflow-hidden transform transition-transform group-hover:scale-105 shadow-lg p-4">
+<div class="text-center">
+<h3 class="text-lg font-bold text-yellow-300">Kalvyn</h3>
+<p class="text-white font-medium">ADJOVI</p>
+<div class="my-2 h-0.5 w-12 bg-blue-300/30 mx-auto"></div>
+<p class="text-blue-300 text-sm">Âge: 16</p>
+<p class="text-white/70 text-sm">1ère STI2D 1</p>
+</div>
+</div>
+</div>
+<div class="group">
+<div class="bg-[#1a3a5e] rounded-xl overflow-hidden transform transition-transform group-hover:scale-105 shadow-lg p-4">
+<div class="text-center">
+<h3 class="text-lg font-bold text-yellow-300">Paul</h3>
+<p class="text-white font-medium">BEREJNI</p>
+<div class="my-2 h-0.5 w-12 bg-blue-300/30 mx-auto"></div>
+<p class="text-blue-300 text-sm">Âge: 16</p>
+<p class="text-white/70 text-sm">1ère STI2D 1</p>
+</div>
+</div>
+</div>
+<div class="group">
+<div class="bg-[#1a3a5e] rounded-xl overflow-hidden transform transition-transform group-hover:scale-105 shadow-lg p-4">
+<div class="text-center">
+<h3 class="text-lg font-bold text-yellow-300">Hugo</h3>
+<p class="text-white font-medium">BROUCK</p>
+<div class="my-2 h-0.5 w-12 bg-blue-300/30 mx-auto"></div>
+<p class="text-blue-300 text-sm">Âge: 17</p>
+<p class="text-white/70 text-sm">Terminale STI2D 2</p>
+</div>
+</div>
+</div>
+<div class="group">
+<div class="bg-[#1a3a5e] rounded-xl overflow-hidden transform transition-transform group-hover:scale-105 shadow-lg p-4">
+<div class="text-center">
+<h3 class="text-lg font-bold text-yellow-300">Enzo</h3>
+<p class="text-white font-medium">FERREIRA</p>
+<div class="my-2 h-0.5 w-12 bg-blue-300/30 mx-auto"></div>
+<p class="text-blue-300 text-sm">Âge: 16</p>
+<p class="text-white/70 text-sm">1ère STI2D 1</p>
+</div>
+</div>
+</div>
+<div class="group">
+<div class="bg-[#1a3a5e] rounded-xl overflow-hidden transform transition-transform group-hover:scale-105 shadow-lg p-4">
+<div class="text-center">
+<h3 class="text-lg font-bold text-yellow-300">François</h3>
+<p class="text-white font-medium">GIRONDON</p>
+<div class="my-2 h-0.5 w-12 bg-blue-300/30 mx-auto"></div>
+<p class="text-blue-300 text-sm">Âge: 16</p>
+<p class="text-white/70 text-sm">1ère STI2D 3</p>
+</div>
+</div>
+</div>
+<div class="group">
+<div class="bg-[#1a3a5e] rounded-xl overflow-hidden transform transition-transform group-hover:scale-105 shadow-lg p-4">
+<div class="text-center">
+<h3 class="text-lg font-bold text-yellow-300">Noam</h3>
+<p class="text-white font-medium">HAMIM</p>
+<div class="my-2 h-0.5 w-12 bg-blue-300/30 mx-auto"></div>
+<p class="text-blue-300 text-sm">Âge: 16</p>
+<p class="text-white/70 text-sm">1ère STI2D 1</p>
+</div>
+</div>
+</div>
+<div class="group">
+<div class="bg-[#1a3a5e] rounded-xl overflow-hidden transform transition-transform group-hover:scale-105 shadow-lg p-4">
+<div class="text-center">
+<h3 class="text-lg font-bold text-yellow-300">Aramayis</h3>
+<p class="text-white font-medium">MURADYAN</p>
+<div class="my-2 h-0.5 w-12 bg-blue-300/30 mx-auto"></div>
+<p class="text-blue-300 text-sm">Âge: 19</p>
+<p class="text-white/70 text-sm">Terminale STI2D1</p>
+</div>
+</div>
+</div>
+<div class="group">
+<div class="bg-[#1a3a5e] rounded-xl overflow-hidden transform transition-transform group-hover:scale-105 shadow-lg p-4">
+<div class="text-center">
+<h3 class="text-lg font-bold text-yellow-300">Alex</h3>
+<p class="text-white font-medium">MURADYAN</p>
+<div class="my-2 h-0.5 w-12 bg-blue-300/30 mx-auto"></div>
+<p class="text-blue-300 text-sm">Âge: -</p>
+<p class="text-white/70 text-sm">-</p>
+</div>
+</div>
+</div>
+<div class="group">
+<div class="bg-[#1a3a5e] rounded-xl overflow-hidden transform transition-transform group-hover:scale-105 shadow-lg p-4">
+<div class="text-center">
+<h3 class="text-lg font-bold text-yellow-300">Timothé</h3>
+<p class="text-white font-medium">PENNEL</p>
+<div class="my-2 h-0.5 w-12 bg-blue-300/30 mx-auto"></div>
+<p class="text-blue-300 text-sm">Âge: 18</p>
+<p class="text-white/70 text-sm">Terminale STI2D 2</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-24 bg-[#0c1f33]" id="contact">
+<div class="container mx-auto px-4">
+<div class="max-w-3xl mx-auto text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold mb-6 text-blue-300">CONTACTEZ-NOUS</h2>
+<div class="h-1 w-24 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 mx-auto mb-8"></div>
+<p class="text-lg text-white/80">
+              Vous avez des questions ou souhaitez en savoir plus sur notre équipe ? N'hésitez pas à nous contacter.
+            </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<div class="bg-[#1a3a5e] rounded-xl p-8 shadow-lg">
+<h3 class="text-xl font-bold mb-6 text-yellow-300">Envoyez-nous un message</h3>
+<form action="mailto:emna.sabahi@ozanam.eu" enctype="text/plain" method="post">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+<div>
+<label class="block text-sm font-medium text-white/70 mb-2" for="name">
+                      Nom
+                    </label>
+<input class="w-full px-4 py-2 bg-[#0c1f33] border border-blue-900/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300/50 text-white" id="name" name="name" placeholder="Votre nom" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-white/70 mb-2" for="email">
+                      Email
+                    </label>
+<input class="w-full px-4 py-2 bg-[#0c1f33] border border-blue-900/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300/50 text-white" id="email" name="email" placeholder="Votre email" type="email"/>
+</div>
+</div>
+<div class="mb-4">
+<label class="block text-sm font-medium text-white/70 mb-2" for="subject">
+                    Sujet
+                  </label>
+<input class="w-full px-4 py-2 bg-[#0c1f33] border border-blue-900/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300/50 text-white" id="subject" name="subject" placeholder="Sujet de votre message" type="text"/>
+</div>
+<div class="mb-6">
+<label class="block text-sm font-medium text-white/70 mb-2" for="message">
+                    Message
+                  </label>
+<textarea class="w-full px-4 py-2 bg-[#0c1f33] border border-blue-900/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300/50 text-white resize-none" id="message" name="message" placeholder="Votre message" rows="5"></textarea>
+</div>
+<button class="w-full btn btn-primary" type="submit">
+                  ENVOYER
+                </button>
+</form>
+</div>
+<div>
+<div class="bg-[#1a3a5e] rounded-xl p-8 shadow-lg mb-8">
+<h3 class="text-xl font-bold mb-6 text-yellow-300">Informations de contact</h3>
+<div class="space-y-6">
+<div class="flex items-start">
+<div class="w-10 h-10 bg-blue-300/20 rounded-lg flex items-center justify-center mr-4 shrink-0">
+<svg class="text-blue-300" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+<circle cx="12" cy="10" r="3"></circle>
+</svg>
+</div>
+<div>
+<p class="text-white/70">École Ozanam, Pecquencourt</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 bg-blue-300/20 rounded-lg flex items-center justify-center mr-4 shrink-0">
+<svg class="text-blue-300" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
+<rect height="16" rx="2" width="20" x="2" y="4"></rect>
+<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+</svg>
+</div>
+<div>
+<h4 class="text-white font-medium mb-1">Email</h4>
+<a class="text-white/70 hover:text-blue-300 transition-colors" href="mailto:emna.sabahi@ozanam.eu">
+                        emna.sabahi@ozanam.eu
+                      </a>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-[#1a3a5e] rounded-xl overflow-hidden shadow-lg h-64 relative">
+<div class="absolute inset-0 flex items-center justify-center">
+<a href="https://maps.app.goo.gl/Eo9Eo9Eo9Eo9Eo9E9" rel="noopener noreferrer" target="_blank">
+<button class="btn btn-primary">
+                      VOIR SUR GOOGLE MAPS
+                    </button>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0c1f33] pt-16 pb-8 border-t border-blue-900/30">
+<div class="container mx-auto px-4">
+<div class="flex flex-col items-center mb-12">
+<div class="flex items-center gap-2 mb-4">
+<span class="text-xl font-bold text-blue-300">
+              MECH<span class="text-blue-300">N'</span>ROSES
+            </span>
+</div>
+<p class="text-white/70 mb-4 text-center max-w-xl">
+            L'équipe de robotique de l'École Ozanam, Pecquencourt, participant à la Coupe de France de Robotique
+            2025.
+          </p>
+<div class="flex space-x-3">
+<a class="w-8 h-8 rounded-full bg-blue-300/20 flex items-center justify-center text-blue-300 hover:bg-blue-300/30 transition-colors" href="mailto:emna.sabahi@ozanam.eu">
+<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+<rect height="16" rx="2" width="20" x="2" y="4"></rect>
+<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+</svg>
+</a>
+</div>
+</div>
+<div class="border-t border-blue-900/30 pt-8 flex flex-col md:flex-row justify-between items-center">
+<p class="text-white/50 text-sm mb-4 md:mb-0">
+            © 2025 Mech N'Roses - École Ozanam, Pecquencourt. Tous droits réservés.
+          </p>
+</div>
+</div>
+<div class="mt-8 flex justify-center"><img alt="Logo OEC" class="h-12" src="images/logo-oec.png"/></div></footer>
+</div>
+</body>
+</html>
